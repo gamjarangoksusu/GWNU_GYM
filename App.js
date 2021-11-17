@@ -1,36 +1,35 @@
 import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import ReservationListScreen from './src/ReservationListScreen'
-import MyPageScreen from './src/MyPageScreen'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import MainScreen from './src/MainScreen';
+import LoginScreen from './src/LoginScreen'
+import ReservationScreen from './src/ReservationScreen';
+import Community from './src/Community';
 
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 const App = () => {
+
   return (
     <NavigationContainer>
-      <Tab.Navigator 
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
-            if (route.name === "예약") {
-              iconName = focused ? 'calendar' : 'calendar-outline';
-            } else if (route.name === "마이페이지") {
-              iconName = focused ? 'person' : 'person-outline';
-            }
-
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: 'tomato',
-          tabBarInactiveTintColor: 'gray',
-        })}
-      >
-        <Tab.Screen name="예약" component={ReservationListScreen} />
-        <Tab.Screen name="마이페이지" component={MyPageScreen} />
-      </Tab.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="메인"
+          component={MainScreen}
+        />
+        <Stack.Screen
+          name="로그인"
+          component={LoginScreen}
+        />
+        <Stack.Screen
+          name="예약하기"
+          component={ReservationScreen}
+        />
+        <Stack.Screen
+          name={"커뮤니티"}
+          component={Community}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
